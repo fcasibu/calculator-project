@@ -1,5 +1,11 @@
 let arr = []
 
+const screen = document.querySelector('h2')
+
+function updateScreen() {
+    screen.textContent = arr.join("")
+}
+
 function keyboardPressed(e) {
     const key = document.querySelector(`div[data-key="${e.key}"]`)
     if (!key) return // returns nothing if key pressed is not in the calculator
@@ -18,12 +24,6 @@ function keyboardPressed(e) {
         console.log(arr.join(""))
     }
     updateScreen();
-}
-
-const screen = document.querySelector('h2')
-
-function updateScreen() {
-    screen.textContent = arr.join("")
 }
 
 window.addEventListener('keydown', keyboardPressed)
