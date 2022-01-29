@@ -3,6 +3,7 @@ let bottomNum = ''
 let operator = ''
 let result;
 let buttons = document.querySelectorAll('button')
+let dot = false
 
 let bottomScreen = document.querySelector('h2')
 let topScreen = document.querySelector('h3')
@@ -41,6 +42,11 @@ function keyboardPressed(e) {
 // Display number pressed/clicked in the calculator to the bottom of the screen
 function numberPress(e) {
     if (e.classList.contains('number')) {
+        if (e.textContent === '.' && !dot) {
+            dot = true
+        } else if (e.textContent === '.' && dot) {
+            return
+        }
         bottomNum += e.textContent
         bottomScreen.textContent = bottomNum
     }
@@ -50,7 +56,8 @@ function numberPress(e) {
 function operatorPress(e) {
     const operatorName = e.textContent
     if (e.classList.contains('operator')) {
-        if (!bottomNum) return // Returns nothing if user didn't input a second number
+        dot = false
+        if (!bottomNum) return; // Returns nothing if user didn't input a second number
         if (topNum && operator && bottomNum) {
             operate() // Calls the operate function if all condition is true
         } else {
@@ -76,7 +83,7 @@ function operate() {
         result = parseFloat(result) - parseFloat(bottomNum)
     } else if (operator === '*') {
         result = parseFloat(result) * parseFloat(bottomNum)
-    } else if (operator === '/') {
+    } else if (operator === '÷') {
         result = parseFloat(result) / parseFloat(bottomNum)
     } else if (operator === '%') {
         result = parseFloat(result) % parseFloat(bottomNum)
@@ -85,10 +92,17 @@ function operate() {
 
 function equal() {
     operate()
-    topScreen.textContent = Math.round(result)
+    if (isNaN(result)) {
+        topScreen.textContent = "You can't do that ! ! !"
+        setTimeout(() => clearAll(), 1200)
+    } else {
+        topScreen.textContent = Math.round((result + Number.EPSILON) * 100) / 100
+    }
+
     bottomScreen.textContent = ''
     bottomNum = bottomScreen.textContent
 }
+
 
 function backspace() {
     const slicebottomScreen = bottomScreen.textContent.slice(0, -1)
