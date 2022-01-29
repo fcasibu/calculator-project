@@ -22,3 +22,5 @@ Both keyboard and mouse input works to operate
 #
 
 This is the accumulation of what I've learned both in The Odin Project, Wes Bos Javascript Course, and a few youtube tutorials. It's all thanks to them for teaching me the logic and functionalities necessary to create this.
+
+I would like to thank Bananatape#0465 in the TOP discord for pointing out some issues in this project
