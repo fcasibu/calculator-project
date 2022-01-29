@@ -1,49 +1,108 @@
-let arr = []
+let topNum = ''
+let bottomNum = ''
+let operator = ''
+let result;
+let buttons = document.querySelectorAll('button')
 
-const screen = document.querySelector('h2')
+let bottomScreen = document.querySelector('h2')
+let topScreen = document.querySelector('h3')
 
-function updateScreen() {
-    screen.textContent = arr.join("")
-}
+// Mouse click
+buttons.forEach(button => button.addEventListener('click', function () {
+    if (button.classList.contains('number')) {
+        numberPress(button)
+    } else if (button.classList.contains('operator')) {
+        operatorPress(button)
+    } else if (button.classList.contains('equal')) {
+        equal()
+    } else if (button.classList.contains('clear')) {
+        clearAll()
+    } else if (button.classList.contains('del')) {
+        backspace()
+    }
+}))
 
+// Keyboard press
 function keyboardPressed(e) {
-    const key = document.querySelector(`div[data-key="${e.key}"]`)
-    if (!key) return // returns nothing if key pressed is not in the calculator
+    let key = document.querySelector(`button[data-key="${e.key}"]`)
+    if (!key) return
     key.classList.add('pressed')
     setTimeout(function () {
         key.classList.remove('pressed')
     }, 100)
 
-    if (key.classList.contains('number')) {
-        arr.push(key.textContent)
-        console.log(arr.join(""))
-    }
+    numberPress(key)
+    operatorPress(key);
+    `${e.key}` === '=' ? equal(): false;
+    `${e.key}` === 'Backspace' ? backspace(): false;
+    `${e.key}` === 'c' ? clearAll(): false;
+}
 
-    if (key.classList.contains('operator')) {
-        arr.push(key.textContent)
-        console.log(arr.join(""))
+// Display number pressed/clicked in the calculator to the bottom of the screen
+function numberPress(e) {
+    if (e.classList.contains('number')) {
+        bottomNum += e.textContent
+        bottomScreen.textContent = bottomNum
     }
-    updateScreen();
+}
+
+// Stores the operator in the operator variable
+function operatorPress(e) {
+    const operatorName = e.textContent
+    if (e.classList.contains('operator')) {
+        if (!bottomNum) return // Returns nothing if user didn't input a second number
+        if (topNum && operator && bottomNum) {
+            operate() // Calls the operate function if all condition is true
+        } else {
+            result = parseFloat(bottomNum)
+        }
+        operator = operatorName
+        topNumber()
+    }
+}
+
+// Displays the top number of the screen
+function topNumber() {
+    topNum += bottomNum + ' ' + operator + ' '
+    topScreen.textContent = topNum
+    bottomScreen.textContent = ''
+    bottomNum = bottomScreen.textContent
+}
+
+function operate() {
+    if (operator === '+') {
+        result = parseFloat(result) + parseFloat(bottomNum)
+    } else if (operator === '-') {
+        result = parseFloat(result) - parseFloat(bottomNum)
+    } else if (operator === '*') {
+        result = parseFloat(result) * parseFloat(bottomNum)
+    } else if (operator === '/') {
+        result = parseFloat(result) / parseFloat(bottomNum)
+    } else if (operator === '%') {
+        result = parseFloat(result) % parseFloat(bottomNum)
+    }
+}
+
+function equal() {
+    operate()
+    topScreen.textContent = Math.round(result)
+    bottomScreen.textContent = ''
+    bottomNum = bottomScreen.textContent
+}
+
+function backspace() {
+    const slicebottomScreen = bottomScreen.textContent.slice(0, -1)
+    const slicebottomNum = bottomNum.slice(0, -1)
+    bottomScreen.textContent = slicebottomScreen
+    bottomNum = slicebottomNum
+}
+
+function clearAll() {
+    topNum = ''
+    bottomNum = ''
+    operator = ''
+    bottomScreen.textContent = 0
+    topScreen.textContent = ''
 }
 
 window.addEventListener('keydown', keyboardPressed)
-
-function add(num1, num2) {
-    return num1 + num2
-}
-
-function subtract(num1, num2) {
-    return num1 - num2
-}
-
-function multiply(num1, num2) {
-    return num1 * num2
-}
-
-function divide(num1, num2) {
-    return num1 / num2
-}
-
-function modulo(num1, num2) {
-    return num1 % num2
-}

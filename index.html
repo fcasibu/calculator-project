@@ -19,31 +19,32 @@
       <div class="calculator-top flex">
         <h1>Calculator</h1>
       </div>
-      <div class="display flex">
-        <div class="display-num flex">
-          <h2>1010101010</h2>
+      <div class="screen flex">
+        <div class="screen-num flex">
+          <h3></h3>
+          <h2>0</h2>
         </div>
       </div>
       <div class="buttons grid">
-        <div data-key="c" class="key">CE</div>
-        <div data-key="Delete" class="key">Del</div>
-        <div data-key="%" class="modulo operator">%</div>
-        <div data-key="/" class="divide operator">÷</div>
-        <div data-key="7" class="number">7</div>
-        <div data-key="8" class="number">8</div>
-        <div data-key="9" class="number">9</div>
-        <div data-key="*" class="times operator">*</div>
-        <div data-key="4" class="number">4</div>
-        <div data-key="5" class="number">5</div>
-        <div data-key="6" class="number">6</div>
-        <div data-key="-" class="minus operator">-</div>
-        <div data-key="1" class="number">1</div>
-        <div data-key="2" class="number">2</div>
-        <div data-key="3" class="number">3</div>
-        <div data-key="+" class="plus operator">+</div>
-        <div data-key="0" class="number">0</div>
-        <div data-key="." class="decimal">.</div>
-        <div data-key="=" class="equal">=</div>
+        <button data-key="c" class="clear" onclick="clearAll()">C</button>
+        <button data-key="Backspace" class="del">Del</button>
+        <button data-key="%" class="operator">%</button>
+        <button data-key="/" class="operator">÷</button>
+        <button data-key="7" class="number">7</button>
+        <button data-key="8" class="number">8</button>
+        <button data-key="9" class="number">9</button>
+        <button data-key="*" class="operator">*</button>
+        <button data-key="4" class="number">4</button>
+        <button data-key="5" class="number">5</button>
+        <button data-key="6" class="number">6</button>
+        <button data-key="-" class="operator">-</button>
+        <button data-key="1" class="number">1</button>
+        <button data-key="2" class="number">2</button>
+        <button data-key="3" class="number">3</button>
+        <button data-key="+" class="operator">+</button>
+        <button data-key="0" class="number">0</button>
+        <button data-key="." class="decimal number">.</button>
+        <button data-key="=" class="equal">=</button>
       </div>
     </div>
   </body>
