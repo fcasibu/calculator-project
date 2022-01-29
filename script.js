@@ -98,6 +98,7 @@ function equal() {
     } else {
         topScreen.textContent = Math.round((result + Number.EPSILON) * 100) / 100
     }
+    dot = false;
 
     bottomScreen.textContent = ''
     bottomNum = bottomScreen.textContent
@@ -109,6 +110,7 @@ function backspace() {
     const slicebottomNum = bottomNum.slice(0, -1)
     bottomScreen.textContent = slicebottomScreen
     bottomNum = slicebottomNum
+    dot = false
 }
 
 function clearAll() {
@@ -117,6 +119,8 @@ function clearAll() {
     operator = ''
     bottomScreen.textContent = 0
     topScreen.textContent = ''
+    result = ''
+    dot = false
 }
 
 window.addEventListener('keydown', keyboardPressed)
